@@ -35,7 +35,7 @@ template <typename T> Matrix<T>::Matrix(int elem)
     {
         m_data[i] = new T[m_column]; 
     }
-    // Fulling Matrix with 0
+    // Filling Matrix with 0
     for(int i = 0; i != m_row; ++i)
     {
         for(int j = 0; j != m_column; ++j)
@@ -50,7 +50,7 @@ template <typename T> Matrix<T>::Matrix(): m_row(1),m_column(1){
     m_data[0] = new T[1];
 }
 
-// Copy coonstructor
+// Copy constructor and operator=
 template <typename T> Matrix<T>::Matrix(const Matrix<T>& mat)
 {
     m_row = mat.m_row;
@@ -127,8 +127,10 @@ template <typename T> Matrix<T>::~Matrix()
     delete [] m_data;
 }
 
-////////////////
-////Getters/////
+//===----------------------------------------------------------------------===//
+// Getters
+//===----------------------------------------------------------------------===//
+
 template <typename T> Matrix<T> Matrix<T>::get_diag(int param) const {
     ///ADD CHECK FOR OUT OF RANGE VALUE!!!!!!!!!!
     int size = m_row;
@@ -159,8 +161,10 @@ template <typename T> Matrix<T> Matrix<T>::get_diag() const {
     return diagonal;
 }
 
+//===----------------------------------------------------------------------===//
+// Setters
+//===----------------------------------------------------------------------===//
 
-/////Setters/////
 ///It's need the exceptions security
 template <typename T> void Matrix<T>::set_diag(int num, Matrix<T> &vec){
     //Check the correc size as exception
@@ -216,8 +220,9 @@ template <typename T> void Matrix<T>::set_submatrix(int first_row, int first_col
     }
 }
 
-//////////////// 
-
+//===----------------------------------------------------------------------===//
+// Additional Funcitons 
+//===----------------------------------------------------------------------===//
 
 template <typename T> void Matrix<T>::fill(T t)
 {
@@ -241,7 +246,6 @@ template<typename T> Matrix<T> Matrix<T>::eye(int lines)
     
     return mat;
 }
-
 
 // Method for fulling matrix with elements from keyboard
 template <typename T> void Matrix<T>::filling_Matrix()
@@ -295,7 +299,6 @@ template <typename T> Matrix<T>& Matrix<T>::transpose() &
 }
 
 //Method for negotiate matrix
-
 template<typename T> Matrix<T>& Matrix<T>::negation() &
 {
     for (int i = 0; i != m_row; ++i)
@@ -304,6 +307,7 @@ template<typename T> Matrix<T>& Matrix<T>::negation() &
     return *this; 
 }
 
+//Method for multiplying matrix by vector
 template <typename T> Matrix<T> Matrix<T>::mat_vec_multipl(Matrix<T>& vec)
 {
     ///ADD THE EXCEPTIONS SUPPORT
@@ -324,6 +328,7 @@ template <typename T> Matrix<T> Matrix<T>::mat_vec_multipl(Matrix<T>& vec)
     }
     return result;
 }
+
 //Multiplication of *this matrix on the matrix which stand on the right hand side
 template <typename T> Matrix<T> Matrix<T>::right_multipl(Matrix<T> &mat){
     if(this->m_column != mat.get_row()){
@@ -420,7 +425,7 @@ template <typename T> Matrix<T> Matrix<T>::operator--(int)
 //Overloading binary operators +, -, *, /, ...
 
 
-// Overloading stream op
+// Overloading output stream op
 
 template <typename T> void Matrix<T>::dump(std::ostream& os) const
 {
@@ -452,7 +457,10 @@ template <typename T> typename Matrix<T>::Proxy_Matrix Matrix<T>::operator[](int
 //YOU HAVE TO WRITE OVERLOADING OF <=> OPERATOR FOR USING +,-,... WITH ANY MATRIX
 
 
-//Function for calculate matrix determinant
+//===----------------------------------------------------------------------===//
+// Linear Algebra Funcitons
+//===----------------------------------------------------------------------===//
+
 template <typename T> T Matrix<T>::det()
 {
     //ADD THE ECXCEPTION SUPPORT

@@ -5,10 +5,29 @@
 #include <iostream>
 
 
-template <typename T> class Matrix final
-{
+template <typename Matrix> 
+class mat_iterator
+{   
+public:
+    using value_type     = typename Matrix::value_type; 
+    using pointer_type   = value_type*;
+    using reference_type = value_type&;
+public:
+    mat_iterator(pointer_type ptr) : _ptr(ptr) {}
 private:
-    T** m_data;
+    pointer_type m_ptr;
+}; 
+
+
+
+template <typename T> 
+class Matrix final
+{ 
+public: 
+    using T = value_type;
+    using iterator = mat_iterator<Matrix<T>>;
+private:  
+    T** m_data; 
     int m_row, m_column;
 
     struct Proxy_Matrix
@@ -51,8 +70,10 @@ public:
     Proxy_Matrix operator[](int n);
     // Class methods //
     void fill(T t);
-    
     int size(){return m_row*m_column;}
+
+    iterator begin() {return m_data;}
+     iterator end() {return ;}
 
     // Getters
     int get_row() const {return m_row;}
@@ -79,7 +100,7 @@ public:
     void dump(std::ostream& os) const;
 
     //Determenant
-    T det();
+    value_type det();
 
     Matrix inverse();
     Matrix cofactor();
