@@ -1,1 +1,8 @@
-./.vscode
+#Ignore Mac files
+.DS_store
+
+#Ignore VScode files
+.vscode
+
+#Ignore config files
+./build
