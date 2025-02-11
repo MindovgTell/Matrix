@@ -5,27 +5,9 @@
 #include <iostream>
 
 
-// template <typename Matrix> 
-// class mat_iterator
-// {   
-// public:
-//     using Value_type     = typename Matrix::Value_type; 
-//     using pointer_type   = Value_type*;
-//     using reference_type = Value_type&;
-// public:
-//     mat_iterator(pointer_type ptr) : m_ptr(ptr) {}
-// private:
-//     pointer_type m_ptr;
-// }; 
-
-
-
 template <typename T> 
 class Matrix final
 { 
-public: 
-    //using T = Value_type;
-    //using iterator = mat_iterator<Matrix<T>>;
 private:  
     T** m_data; 
     int m_row, m_column;
@@ -71,10 +53,7 @@ public:
     // Class methods //
     void fill(T t);
     int size(){return m_row*m_column;}
-
-    // iterator begin() {return m_data;}
-    // iterator end() {return ;}
-
+    
     // Getters
     int get_row() const {return m_row;}
     int get_columns() const {return m_column;}
